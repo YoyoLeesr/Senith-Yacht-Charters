@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Senith Yacht Charters | Luxury Yacht Experiences</title>
+  <meta name="description" content="Premium yacht charters for private getaways, corporate charters, and bespoke marine events." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#05070B;
+      --bg2:#070A0F;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --border:rgba(255,255,255,.12);
+      --panel:rgba(255,255,255,.05);
+      --panel2:rgba(255,255,255,.07);
+      --gold:#C8A45B;
+      --cyan:#6EE7FF;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --r:18px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 18% 8%, rgba(110,231,255,.10), transparent 60%),
+        radial-gradient(720px 520px at 82% 14%, rgba(200,164,91,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 35%, var(--bg) 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .btn{
+      padding:11px 14px; border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      color:var(--text); font-weight:600; font-size:14px;
+      display:inline-flex; gap:10px; align-items:center; justify-content:center;
+      cursor:pointer;
+      transition:transform .15s ease, background .15s ease, border-color .15s ease;
+      box-shadow:0 12px 30px rgba(0,0,0,.22);
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18)}
+    .btn.primary{
+      border-color: rgba(200,164,91,.35);
+      background: linear-gradient(135deg, rgba(200,164,91,.22), rgba(110,231,255,.12));
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; color:rgba(255,255,255,.82);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:6px 10px; border-radius:999px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(5,7,11,.58);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:14px;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(110,231,255,.85), rgba(110,231,255,.22) 45%, transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(200,164,91,.82), rgba(200,164,91,.20) 48%, transparent 68%),
+        rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      box-shadow:0 12px 24px rgba(0,0,0,.30);
+    }
+    .brand strong{font-family:"Playfair Display", serif; font-weight:600; font-size:18px; line-height:1}
+    .brand span{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
+    nav ul{display:flex; list-style:none; gap:18px; padding:0; margin:0; color:var(--muted); font-weight:500; font-size:14px}
+    nav a{padding:10px 10px; border-radius:12px}
+    nav a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .nav-cta{display:flex; gap:10px; align-items:center}
+
+    /* Hero */
+    .hero{padding:34px 0 16px}
+    .hero-wrap{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .hero-left{
+      position:relative;
+      overflow:hidden;
+      border-radius: 22px;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+      min-height: 520px;
+      background:
+        radial-gradient(600px 320px at 18% 14%, rgba(110,231,255,.16), transparent 60%),
+        radial-gradient(700px 360px at 80% 35%, rgba(200,164,91,.14), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .hero-media{
+      position:absolute; inset:0;
+      /* Replace with real hero image/video */
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.55)),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=70") center/cover no-repeat;
+      filter:saturate(1.05) contrast(1.05);
+      transform: scale(1.02);
+    }
+    .hero-content{
+      position:relative;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      height:100%;
+      gap:12px;
+    }
+    h1{
+      font-family:"Playfair Display", serif;
+      font-size: 46px;
+      line-height:1.05;
+      margin:0;
+      letter-spacing:.2px;
+      text-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
+    .sub{
+      margin:0;
+      color: rgba(255,255,255,.78);
+      line-height:1.65;
+      max-width: 62ch;
+    }
+    .hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px}
+    .hero-stats{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+
+    /* Quick search */
+    .search{
+      padding:16px;
+      border-radius:22px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .search h3{margin:0; font-size:16px; letter-spacing:.2px}
+    .search-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px}
+    input, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,14,22,.78);
+      color: var(--text);
+      outline:none;
+    }
+    input:focus, select:focus{
+      border-color: rgba(110,231,255,.45);
+      box-shadow: 0 0 0 4px rgba(110,231,255,.12);
+    }
+    .full{grid-column: 1 / -1}
+    .search small{color:var(--muted); line-height:1.45}
+
+    /* Sections */
+    section{padding:28px 0}
+    .section-title{
+      display:flex; justify-content:space-between; align-items:flex-end;
+      gap:18px; margin-bottom:14px;
+    }
+    .section-title h2{
+      margin:0; font-family:"Playfair Display", serif; font-size:26px; font-weight:600;
+    }
+    .section-title p{margin:0; color:var(--muted); max-width:70ch}
+
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .yacht{
+      padding:16px;
+      border-radius: var(--r);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      box-shadow: 0 14px 45px rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      overflow:hidden;
+    }
+    .yacht:hover{transform:translateY(-2px); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.18)}
+    .thumb{
+      height:168px; border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(135deg, rgba(110,231,255,.14), rgba(200,164,91,.12)),
+                  rgba(255,255,255,.03);
+      margin-bottom:12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb img{width:100%; height:100%; object-fit:cover; opacity:.92}
+    .badge{
+      position:absolute; top:12px; left:12px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      background: rgba(5,7,11,.55);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+      color: rgba(255,255,255,.88);
+    }
+    .yacht h3{margin:0 0 6px; font-size:16px}
+    .yacht p{margin:0 0 12px; color:var(--muted); font-size:13px; line-height:1.55}
+    .meta{display:flex; gap:10px; flex-wrap:wrap; font-size:12px; color:rgba(255,255,255,.80)}
+    .meta span{padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10)}
+
+    /* Destinations */
+    .dest-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:14px}
+    .dest-big{
+      padding:18px;
+      border-radius:var(--r);
+      border:1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.60)),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=70") center/cover no-repeat;
+      box-shadow:var(--shadow);
+      min-height: 340px;
+      display:flex; flex-direction:column; justify-content:flex-end; gap:10px;
+    }
+    .dest-list{padding:18px; border-radius:var(--r); border:1px solid var(--border); background:rgba(255,255,255,.04); box-shadow:var(--shadow)}
+    .dest-list ul{margin:10px 0 0; padding:0; list-style:none}
+    .dest-list li{
+      display:flex; justify-content:space-between; gap:12px;
+      padding:12px 0;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+    }
+    .dest-list li:first-child{border-top:none; padding-top:0}
+    .dest-list b{color:rgba(255,255,255,.88)}
+
+    /* Immersive */
+    .immersive{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    .viewer{
+      min-height: 340px;
+      border-radius: var(--r);
+      border:1px solid var(--border);
+      background:
+        radial-gradient(600px 300px at 30% 20%, rgba(110,231,255,.18), transparent 60%),
+        radial-gradient(600px 300px at 70% 70%, rgba(200,164,91,.16), transparent 60%),
+        rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .viewer .fake{position:absolute; inset:0; background:
+      radial-gradient(220px 180px at 55% 45%, rgba(255,255,255,.10), transparent 60%),
+      radial-gradient(240px 140px at 40% 55%, rgba(110,231,255,.14), transparent 60%),
+      radial-gradient(180px 140px at 62% 60%, rgba(200,164,91,.12), transparent 60%);
+    }
+    .viewer .overlay{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      padding:18px;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.55));
+    }
+
+    /* CTA */
+    .cta-band{
+      border-radius: 22px;
+      border:1px solid rgba(200,164,91,.25);
+      background:
+        radial-gradient(700px 220px at 20% 30%, rgba(110,231,255,.14), transparent 55%),
+        radial-gradient(700px 220px at 90% 60%, rgba(200,164,91,.18), transparent 55%),
+        rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      padding:22px;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:14px; flex-wrap:wrap;
+    }
+
+    footer{
+      padding:30px 0 42px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.10);
+      margin-top:10px;
+    }
+    .footer-grid{display:grid; grid-template-columns: 1.2fr .8fr .8fr; gap:16px}
+
+    /* Sticky CTAs */
+    .sticky-cta{
+      position:fixed; right:16px; bottom:16px;
+      display:flex; flex-direction:column; gap:10px;
+      z-index:60;
+    }
+    .fab{
+      width:52px; height:52px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(10,14,22,.75);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .fab:hover{transform: translateY(-2px); background: rgba(255,255,255,.08)}
+    .fab svg{opacity:.95}
+    .fab.whatsapp{border-color: rgba(37,211,102,.30)}
+    .fab.quote{border-color: rgba(200,164,91,.30)}
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0; z-index:80;
+      display:none;
+      background: rgba(0,0,0,.60);
+      backdrop-filter: blur(6px);
+      padding:22px;
+    }
+    .modal.open{display:grid; place-items:center}
+    .modal-card{
+      width:min(720px, 100%);
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,14,22,.92);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modal-head{
+      padding:16px 18px;
+      display:flex; justify-content:space-between; align-items:center;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .modal-head h3{margin:0; font-size:16px}
+    .modal-body{padding:18px}
+    .x{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      width:38px; height:38px;
+      border-radius: 14px;
+      cursor:pointer;
+      color:var(--text);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      nav ul{display:none}
+      .hero-wrap{grid-template-columns:1fr}
+      .hero-left{min-height: 460px}
+      .grid-3{grid-template-columns:1fr}
+      .dest-grid{grid-template-columns:1fr}
+      .immersive{grid-template-columns:1fr}
+      h1{font-size:40px}
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="#">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Senith</strong>
+          <span>Yacht Charters</span>
+        </div>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#fleet">Fleet</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#experiences">Experiences</a></li>
+          <li><a href="#immersive">3D / VR</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <span class="pill">24/7 Concierge</span>
+        <button class="btn" id="openQuoteTop">Request Quote</button>
+        <a class="btn primary" href="#fleet">Browse Fleet</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-wrap">
+        <div class="hero-left">
+          <div class="hero-media" aria-hidden="true"></div>
+          <div class="hero-content">
+            <div class="pill">Luxury • Privacy • Precision</div>
+            <h1>Discover the Senith of yachting.</h1>
+            <p class="sub">
+              Private yacht getaways, corporate charters, and bespoke marine events—crafted with discreet service and
+              premium standards.
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn primary" id="openQuoteHero">Plan Your Charter</button>
+              <a class="btn" href="#fleet">View Featured Yachts</a>
+              <a class="btn" href="#immersive">Explore in 3D</a>
+            </div>
+
+            <div class="hero-stats">
+              <span class="pill">Curated fleet</span>
+              <span class="pill">Captain & crew</span>
+              <span class="pill">VIP transfers</span>
+              <span class="pill">Corporate-ready</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="search" aria-label="Fleet filters">
+          <h3>Find a Yacht</h3>
+          <div class="search-grid">
+            <div>
+              <label for="fGuests">Guests</label>
+              <select id="fGuests">
+                <option value="">Any</option>
+                <option>2-6</option>
+                <option>7-10</option>
+                <option>11-12</option>
+                <option>12+</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="fLength">Length</label>
+              <select id="fLength">
+                <option value="">Any</option>
+                <option>50-80ft</option>
+                <option>80-120ft</option>
+                <option>120ft+</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="fBudget">Budget</label>
+              <select id="fBudget">
+                <option value="">Any</option>
+                <option>$10k–$25k</option>
+                <option>$25k–$75k</option>
+                <option>$75k–$150k</option>
+                <option>$150k+</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="fDestination">Destination</label>
+              <select id="fDestination">
+                <option value="">Any</option>
+                <option>Dubai</option>
+                <option>Mediterranean</option>
+                <option>Caribbean</option>
+                <option>Maldives</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <button class="btn primary" style="width:100%" id="applyFilters">Show Matching Yachts</button>
+              <small>Prototype filter: hooks into card tags below. In WordPress this maps to CPT taxonomies + AJAX.</small>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="fleet">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Featured Fleet</h2>
+          <p>Premium yachts selected for design, crew standards, and guest experience.</p>
+        </div>
+        <button class="btn" id="openQuoteFleet">Get Recommendations</button>
+      </div>
+
+      <div class="grid-3" id="fleetGrid">
+        <article class="yacht" data-guests="7-10" data-length="50-80ft" data-budget="$10k–$25k" data-destination="Dubai">
+          <div class="thumb">
+            <span class="badge">Dubai • 72ft</span>
+            <img alt="Yacht exterior" src="https://images.unsplash.com/photo-1518527989017-5baca7a58d3c?auto=format&fit=crop&w=1600&q=70">
+          </div>
+          <h3>Aurora 72</h3>
+          <p>Sleek day-charter comfort with premium lounge areas and sunset-ready decks.</p>
+          <div class="meta"><span>8 guests</span><span>3 cabins</span><span>From $8,500/day</span></div>
+        </article>
+
+        <article class="yacht" data-guests="11-12" data-length="80-120ft" data-budget="$25k–$75k" data-destination="Mediterranean">
+          <div class="thumb">
+            <span class="badge">Med • 110ft</span>
+            <img alt="Luxury yacht on open sea" src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1600&q=70">
+          </div>
+          <h3>Celeste 110</h3>
+          <p>Multi-day elegance with chef-ready galley, spacious cabins, and VIP hosting flow.</p>
+          <div class="meta"><span>12 guests</span><span>5 cabins</span><span>From $28,000/day</span></div>
+        </article>
+
+        <article class="yacht" data-guests="12+" data-length="120ft+" data-budget="$75k–$150k" data-destination="Caribbean">
+          <div class="thumb">
+            <span class="badge">Caribbean • 145ft</span>
+            <img alt="Superyacht at anchor" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=70">
+          </div>
+          <h3>Atlas 145</h3>
+          <p>Explorer luxury with water toys, open decks, and long-range itinerary capability.</p>
+          <div class="meta"><span>12 guests</span><span>6 cabins</span><span>From $55,000/day</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="destinations">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Destinations</h2>
+          <p>From iconic skylines to secluded coves—Senith helps you select the perfect waters.</p>
+        </div>
+      </div>
+
+      <div class="dest-grid">
+        <div class="dest-big">
+          <div class="pill">Seasonal recommendations</div>
+          <h3 style="margin:0; font-size:20px;">Dubai, Mediterranean, Caribbean & beyond</h3>
+          <p style="margin:0; color:rgba(255,255,255,.78); line-height:1.6; max-width:60ch;">
+            We optimize routes for weather, sea conditions, marinas, privacy, and guest preferences.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;">
+            <a class="btn primary" href="#contact">Ask for an Itinerary</a>
+            <a class="btn" href="#fleet">Match a Yacht</a>
+          </div>
+        </div>
+
+        <div class="dest-list card">
+          <h3 style="margin:0 0 8px;">Popular routes</h3>
+          <ul>
+            <li><b>Dubai Marina</b> <span>Sunset / night skyline</span></li>
+            <li><b>Palm Jumeirah</b> <span>Luxury coastal cruise</span></li>
+            <li><b>Mykonos</b> <span>Island-hopping vibes</span></li>
+            <li><b>Ibiza</b> <span>Events & beach clubs</span></li>
+            <li><b>St. Barts</b> <span>VIP winter season</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiences">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Signature Experiences</h2>
+          <p>Designed for privacy, comfort, and premium delivery—from planning to onboard execution.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="yacht">
+          <h3>Private Getaways</h3>
+          <p>Curated routes, chef-led dining, secluded anchor spots, and concierge support.</p>
+          <div class="meta"><span>Couples</span><span>Families</span><span>Friends</span></div>
+        </article>
+        <article class="yacht">
+          <h3>Corporate Charters</h3>
+          <p>Hospitality-ready setups for leadership retreats, activations, and VIP client hosting.</p>
+          <div class="meta"><span>Retreats</span><span>Launches</span><span>Hosting</span></div>
+        </article>
+        <article class="yacht">
+          <h3>Bespoke Events</h3>
+          <p>Proposals, birthdays, weddings—production options with premium vendor partners.</p>
+          <div class="meta"><span>Planning</span><span>Decor</span><span>Entertainment</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="immersive">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Immersive (3D / AR)</h2>
+          <p>Add yacht walk-throughs (GLB/USDZ), hotspots, and VR-ready previews—optimized for mobile.</p>
+        </div>
+      </div>
+
+      <div class="immersive">
+        <div class="viewer">
+          <div class="fake" aria-hidden="true"></div>
+          <div class="overlay">
+            <strong>3D Walkthrough Placeholder</strong>
+            <small>Replace with &lt;model-viewer&gt; or Three.js canvas.</small>
+          </div>
+        </div>
+        <div class="card" style="padding:18px;">
+          <h3 style="margin:0 0 6px;">Add-on features (similar, upgraded)</h3>
+          <p style="margin:0; color:var(--muted); line-height:1.6;">
+            Faster pages, cleaner UX, and stronger conversion while keeping familiar navigation and sections.
+          </p>
+          <ul style="margin:10px 0 0; padding:0; list-style:none;">
+            <li style="padding:12px 0; border-top:1px solid rgba(255,255,255,.10); color:var(--muted); display:flex; justify-content:space-between;">
+              <b style="color:rgba(255,255,255,.88)">Fleet search</b><span>Filters + sorting</span>
+            </li>
+            <li style="padding:12px 0; border-top:1px solid rgba(255,255,255,.10); color:var(--muted); display:flex; justify-content:space-between;">
+              <b style="color:rgba(255,255,255,.88)">Inquiry funnel</b><span>Modal + CRM/email</span>
+            </li>
+            <li style="padding:12px 0; border-top:1px solid rgba(255,255,255,.10); color:var(--muted); display:flex; justify-content:space-between;">
+              <b style="color:rgba(255,255,255,.88)">WhatsApp</b><span>Quick conversion</span>
+            </li>
+            <li style="padding:12px 0; border-top:1px solid rgba(255,255,255,.10); color:var(--muted); display:flex; justify-content:space-between;">
+              <b style="color:rgba(255,255,255,.88)">Performance</b><span>Core Web Vitals</span>
+            </li>
+          </ul>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn primary" id="openQuoteImmersive">Request Quote</button>
+            <a class="btn" href="#fleet">Browse Fleet</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <h3 style="margin:0; font-size:18px;">Ready to plan your Senith charter?</h3>
+          <p style="margin:6px 0 0; color:var(--muted); max-width:75ch;">
+            Share your dates, destination, and guest count. We’ll send curated options and a tailored itinerary.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="mailto:charter@senithyachtcharters.com">Email Concierge</a>
+          <button class="btn primary" id="openQuoteCta">Request a Quote</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="gap:10px;">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <strong>Senith</strong>
+            <span>Yacht Charters</span>
+          </div>
+        </div>
+        <p style="margin:12px 0 0; color:var(--muted); line-height:1.6;">
+          Luxury yacht charters for private getaways, corporate charters, and bespoke marine events—delivered with discretion.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="margin:0 0 10px; color:rgba(255,255,255,.85);">Explore</h4>
+        <div style="display:grid; gap:8px;">
+          <a href="#fleet">Fleet</a>
+          <a href="#destinations">Destinations</a>
+          <a href="#experiences">Experiences</a>
+          <a href="#immersive">3D / VR</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="margin:0 0 10px; color:rgba(255,255,255,.85);">Contact</h4>
+        <div style="display:grid; gap:8px;">
+          <a href="mailto:charter@senithyachtcharters.com">charter@senithyachtcharters.com</a>
+          <a href="tel:+10000000000">+1 (000) 000-0000</a>
+          <span style="font-size:13px;">© <span id="year"></span> Senith Yacht Charters</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" aria-label="Quick actions">
+  <button class="fab quote" id="openQuoteFab" title="Request a Quote" aria-label="Request a Quote">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 2v4M16 2v4"></path><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 10h18"></path>
+    </svg>
+  </button>
+
+  <a class="fab whatsapp" id="waLink" title="WhatsApp" aria-label="WhatsApp" href="#" target="_blank" rel="noopener">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.5 8.5 0 0 1-12.9 7.3L3 20l1.3-4.9A8.5 8.5 0 1 1 21 11.5z"></path>
+      <path d="M8.5 9.5c.5 2 3 4.5 5 5"></path>
+    </svg>
+  </a>
+</div>
+
+<div class="modal" id="quoteModal" role="dialog" aria-modal="true" aria-label="Request a quote">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>Request a Quote</h3>
+      <button class="x" id="closeModal" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="quoteForm" class="search-grid">
+        <div>
+          <label for="qName">Name</label>
+          <input id="qName" name="name" placeholder="Full name" required />
+        </div>
+        <div>
+          <label for="qEmail">Email</label>
+          <input id="qEmail" name="email" type="email" placeholder="you@email.com" required />
+        </div>
+        <div>
+          <label for="qPhone">Phone / WhatsApp</label>
+          <input id="qPhone" name="phone" placeholder="+971..." />
+        </div>
+        <div>
+          <label for="qType">Charter type</label>
+          <select id="qType" name="type">
+            <option>Private getaway</option>
+            <option>Corporate charter</option>
+            <option>Event / celebration</option>
+          </select>
+        </div>
+        <div>
+          <label for="qFrom">From</label>
+          <input id="qFrom" name="from" type="date" />
+        </div>
+        <div>
+          <label for="qTo">To</label>
+          <input id="qTo" name="to" type="date" />
+        </div>
+        <div>
+          <label for="qGuests">Guests</label>
+          <input id="qGuests" name="guests" type="number" min="1" value="8" />
+        </div>
+        <div>
+          <label for="qDestination">Destination</label>
+          <select id="qDestination" name="destination">
+            <option>Dubai</option>
+            <option>Mediterranean</option>
+            <option>Caribbean</option>
+            <option>Maldives</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="qNotes">Notes</label>
+          <input id="qNotes" name="notes" placeholder="Preferences (yacht size, cabins, itinerary, occasion)..." />
+        </div>
+        <div class="full" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+          <button class="btn primary" type="submit" style="flex:1;">Send Inquiry</button>
+          <button class="btn" type="button" id="prefillFromFilters">Use Filter Selections</button>
+        </div>
+        <div class="full">
+          <small style="color:var(--muted); line-height:1.5;">
+            Prototype only. In production this posts to WP (CF7/Gravity) or to a CRM via REST API.
+          </small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // WhatsApp link (replace number/message)
+  const waNumber = "971000000000"; // TODO: replace
+  const waMessage = encodeURIComponent("Hi Senith Yacht Charters — I’d like to enquire about a yacht charter.");
+  document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${waMessage}`;
+
+  const modal = document.getElementById('quoteModal');
+  const openers = [
+    'openQuoteTop','openQuoteHero','openQuoteFleet','openQuoteImmersive','openQuoteCta','openQuoteFab'
+  ].map(id => document.getElementById(id)).filter(Boolean);
+
+  const openModal = () => {
+    modal.classList.add('open');
+    setTimeout(()=>document.getElementById('qName').focus(), 50);
+  };
+  const closeModal = () => modal.classList.remove('open');
+
+  openers.forEach(btn => btn.addEventListener('click', openModal));
+  document.getElementById('closeModal').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+  window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+  const filters = {
+    guests: document.getElementById('fGuests'),
+    length: document.getElementById('fLength'),
+    budget: document.getElementById('fBudget'),
+    destination: document.getElementById('fDestination'),
+  };
+  const cards = [...document.querySelectorAll('#fleetGrid .yacht')];
+
+  function applyFilters(){
+    const g = filters.guests.value;
+    const l = filters.length.value;
+    const b = filters.budget.value;
+    const d = filters.destination.value;
+
+    cards.forEach(card => {
+      const ok =
+        (!g || card.dataset.guests === g) &&
+        (!l || card.dataset.length === l) &&
+        (!b || card.dataset.budget === b) &&
+        (!d || card.dataset.destination === d);
+      card.style.display = ok ? '' : 'none';
+    });
+  }
+  document.getElementById('applyFilters').addEventListener('click', applyFilters);
+
+  document.getElementById('prefillFromFilters').addEventListener('click', () => {
+    const dest = filters.destination.value || 'Dubai';
+    document.getElementById('qDestination').value = dest;
+
+    const notes = [];
+    if(filters.guests.value) notes.push(`Guests: ${filters.guests.value}`);
+    if(filters.length.value) notes.push(`Length: ${filters.length.value}`);
+    if(filters.budget.value) notes.push(`Budget: ${filters.budget.value}`);
+    if(filters.destination.value) notes.push(`Destination: ${filters.destination.value}`);
+    if(notes.length) document.getElementById('qNotes').value = notes.join(' | ');
+  });
+
+  document.getElementById('quoteForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    alert(`Thanks ${data.name}! We'll reply to ${data.email} with options for ${data.destination}.`);
+    closeModal();
+    e.target.reset();
+  });
+</script>
+</body>
+</html>
