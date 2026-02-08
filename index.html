@@ -10,6 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- 3D/AR viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
   <style>
     :root{
       --bg:#05070B;
@@ -119,7 +122,6 @@
     }
     .hero-media{
       position:absolute; inset:0;
-      /* Replace with real hero image/video */
       background:
         linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.55)),
         url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=70") center/cover no-repeat;
@@ -255,6 +257,64 @@
     .dest-list li:first-child{border-top:none; padding-top:0}
     .dest-list b{color:rgba(255,255,255,.88)}
 
+    /* POV section */
+    .pov-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .phone{
+      position:relative;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      aspect-ratio: 9 / 16;
+    }
+    .phone video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .phone-topbar{
+      position:absolute;
+      top:10px; left:10px; right:10px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      z-index:2;
+      pointer-events:none;
+    }
+    .chip{
+      font-size:12px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.90);
+      backdrop-filter: blur(8px);
+    }
+    .phone-controls{
+      position:absolute;
+      left:12px; right:12px; bottom:12px;
+      display:flex; justify-content:space-between; gap:10px;
+      z-index:2;
+    }
+    .iconbtn{
+      width:46px; height:46px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.40);
+      backdrop-filter: blur(8px);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+    .iconbtn svg{opacity:.95}
+
     /* Immersive */
     .immersive{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
     .viewer{
@@ -268,17 +328,6 @@
       box-shadow: var(--shadow);
       position:relative;
       overflow:hidden;
-    }
-    .viewer .fake{position:absolute; inset:0; background:
-      radial-gradient(220px 180px at 55% 45%, rgba(255,255,255,.10), transparent 60%),
-      radial-gradient(240px 140px at 40% 55%, rgba(110,231,255,.14), transparent 60%),
-      radial-gradient(180px 140px at 62% 60%, rgba(200,164,91,.12), transparent 60%);
-    }
-    .viewer .overlay{
-      position:absolute; inset:0;
-      display:flex; flex-direction:column; justify-content:flex-end;
-      padding:18px;
-      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.55));
     }
 
     /* CTA */
@@ -366,6 +415,7 @@
       .grid-3{grid-template-columns:1fr}
       .dest-grid{grid-template-columns:1fr}
       .immersive{grid-template-columns:1fr}
+      .pov-grid{grid-template-columns:1fr}
       h1{font-size:40px}
       .footer-grid{grid-template-columns:1fr}
     }
@@ -389,7 +439,7 @@
           <li><a href="#fleet">Fleet</a></li>
           <li><a href="#destinations">Destinations</a></li>
           <li><a href="#experiences">Experiences</a></li>
-          <li><a href="#immersive">3D / VR</a></li>
+          <li><a href="#immersive">3D / AR</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -404,6 +454,7 @@
 </header>
 
 <main>
+  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <div class="hero-wrap">
@@ -416,13 +467,11 @@
               Private yacht getaways, corporate charters, and bespoke marine events—crafted with discreet service and
               premium standards.
             </p>
-
             <div class="hero-actions">
               <button class="btn primary" id="openQuoteHero">Plan Your Charter</button>
               <a class="btn" href="#fleet">View Featured Yachts</a>
               <a class="btn" href="#immersive">Explore in 3D</a>
             </div>
-
             <div class="hero-stats">
               <span class="pill">Curated fleet</span>
               <span class="pill">Captain & crew</span>
@@ -445,7 +494,6 @@
                 <option>12+</option>
               </select>
             </div>
-
             <div>
               <label for="fLength">Length</label>
               <select id="fLength">
@@ -455,7 +503,6 @@
                 <option>120ft+</option>
               </select>
             </div>
-
             <div>
               <label for="fBudget">Budget</label>
               <select id="fBudget">
@@ -466,7 +513,6 @@
                 <option>$150k+</option>
               </select>
             </div>
-
             <div>
               <label for="fDestination">Destination</label>
               <select id="fDestination">
@@ -477,7 +523,6 @@
                 <option>Maldives</option>
               </select>
             </div>
-
             <div class="full">
               <button class="btn primary" style="width:100%" id="applyFilters">Show Matching Yachts</button>
               <small>Prototype filter: hooks into card tags below. In WordPress this maps to CPT taxonomies + AJAX.</small>
@@ -488,6 +533,67 @@
     </div>
   </section>
 
+  <!-- POV VIDEO (needs assets/video/yacht-pov.mp4) -->
+  <section id="pov">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>POV: Step onboard</h2>
+          <p>Short, vertical onboard clips—perfect for mobile-first browsing.</p>
+        </div>
+        <button class="btn" id="openQuotePov">Request Quote</button>
+      </div>
+
+      <div class="pov-grid">
+        <div class="phone" aria-label="Yacht POV video">
+          <div class="phone-topbar">
+            <div class="chip">Senith Yacht Charters</div>
+            <div class="chip">HD</div>
+          </div>
+
+          <video id="povVideo" autoplay muted loop playsinline preload="metadata"
+                 poster="./assets/video/yacht-pov-poster.jpg">
+            <source src="./assets/video/yacht-pov.mp4" type="video/mp4">
+          </video>
+
+          <div class="phone-controls">
+            <button class="iconbtn" id="povToggle" aria-label="Play/Pause">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M6 4h4v16H6z"></path>
+                <path d="M14 4h4v16h-4z"></path>
+              </svg>
+            </button>
+
+            <button class="iconbtn" id="povMute" aria-label="Mute/Unmute">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M11 5 6 9H2v6h4l5 4z"></path>
+                <path d="M23 9l-6 6"></path>
+                <path d="M17 9l6 6"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card" style="padding:18px;">
+          <h3 style="margin:0 0 8px;">Real onboard perspective</h3>
+          <p style="margin:0; color:var(--muted); line-height:1.65;">
+            Autoplay works best when the video is muted (browser requirement). Guests can tap the sound icon to unmute.
+          </p>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="#fleet">Browse Fleet</a>
+            <button class="btn" id="openQuotePov2">Request Quote</button>
+          </div>
+
+          <div style="margin-top:12px; color:var(--muted); font-size:12px; line-height:1.5;">
+            File needed: <b>assets/video/yacht-pov.mp4</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEET -->
   <section id="fleet">
     <div class="container">
       <div class="section-title">
@@ -532,6 +638,7 @@
     </div>
   </section>
 
+  <!-- DESTINATIONS -->
   <section id="destinations">
     <div class="container">
       <div class="section-title">
@@ -568,6 +675,7 @@
     </div>
   </section>
 
+  <!-- EXPERIENCES -->
   <section id="experiences">
     <div class="container">
       <div class="section-title">
@@ -583,11 +691,13 @@
           <p>Curated routes, chef-led dining, secluded anchor spots, and concierge support.</p>
           <div class="meta"><span>Couples</span><span>Families</span><span>Friends</span></div>
         </article>
+
         <article class="yacht">
           <h3>Corporate Charters</h3>
           <p>Hospitality-ready setups for leadership retreats, activations, and VIP client hosting.</p>
           <div class="meta"><span>Retreats</span><span>Launches</span><span>Hosting</span></div>
         </article>
+
         <article class="yacht">
           <h3>Bespoke Events</h3>
           <p>Proposals, birthdays, weddings—production options with premium vendor partners.</p>
@@ -597,28 +707,52 @@
     </div>
   </section>
 
+  <!-- IMMERSIVE -->
   <section id="immersive">
     <div class="container">
       <div class="section-title">
         <div>
           <h2>Immersive (3D / AR)</h2>
-          <p>Add yacht walk-throughs (GLB/USDZ), hotspots, and VR-ready previews—optimized for mobile.</p>
+          <p>Upload a GLB model to preview in 3D. On mobile, tap AR to place it in your space.</p>
         </div>
       </div>
 
       <div class="immersive">
-        <div class="viewer">
-          <div class="fake" aria-hidden="true"></div>
-          <div class="overlay">
-            <strong>3D Walkthrough Placeholder</strong>
-            <small>Replace with &lt;model-viewer&gt; or Three.js canvas.</small>
+        <div class="viewer card" style="padding:14px;">
+          <model-viewer
+            src="./assets/models/yacht.glb"
+            ios-src="./assets/models/yacht.usdz"
+            alt="3D yacht preview"
+            ar
+            ar-modes="scene-viewer quick-look webxr"
+            camera-controls
+            auto-rotate
+            shadow-intensity="1"
+            exposure="1.1"
+            environment-image="neutral"
+            style="width:100%; height:380px; border-radius:16px; background: rgba(255,255,255,.03);"
+          >
+            <button slot="ar-button" class="btn primary" style="position:absolute; left:14px; bottom:14px;">
+              View in AR
+            </button>
+
+            <div slot="poster" style="display:grid; place-items:center; height:100%; color:rgba(255,255,255,.72);">
+              Loading 3D preview…
+            </div>
+          </model-viewer>
+
+          <div style="margin-top:10px; color:rgba(255,255,255,.70); font-size:12px; line-height:1.5;">
+            Needed files (optional): <b>assets/models/yacht.glb</b> (web/Android) and <b>assets/models/yacht.usdz</b> (iOS).
+            If you don’t upload them yet, this area will show blank.
           </div>
         </div>
+
         <div class="card" style="padding:18px;">
-          <h3 style="margin:0 0 6px;">Add-on features (similar, upgraded)</h3>
+          <h3 style="margin:0 0 6px;">Add-on features</h3>
           <p style="margin:0; color:var(--muted); line-height:1.6;">
-            Faster pages, cleaner UX, and stronger conversion while keeping familiar navigation and sections.
+            Add hotspots for cabins/decks, multiple yacht models, and analytics for engagement.
           </p>
+
           <ul style="margin:10px 0 0; padding:0; list-style:none;">
             <li style="padding:12px 0; border-top:1px solid rgba(255,255,255,.10); color:var(--muted); display:flex; justify-content:space-between;">
               <b style="color:rgba(255,255,255,.88)">Fleet search</b><span>Filters + sorting</span>
@@ -633,6 +767,7 @@
               <b style="color:rgba(255,255,255,.88)">Performance</b><span>Core Web Vitals</span>
             </li>
           </ul>
+
           <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
             <button class="btn primary" id="openQuoteImmersive">Request Quote</button>
             <a class="btn" href="#fleet">Browse Fleet</a>
@@ -642,6 +777,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="cta-band">
@@ -682,7 +818,8 @@
           <a href="#fleet">Fleet</a>
           <a href="#destinations">Destinations</a>
           <a href="#experiences">Experiences</a>
-          <a href="#immersive">3D / VR</a>
+          <a href="#immersive">3D / AR</a>
+          <a href="#pov">POV</a>
         </div>
       </div>
 
@@ -698,6 +835,7 @@
   </div>
 </footer>
 
+<!-- Sticky CTAs -->
 <div class="sticky-cta" aria-label="Quick actions">
   <button class="fab quote" id="openQuoteFab" title="Request a Quote" aria-label="Request a Quote">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -713,6 +851,7 @@
   </a>
 </div>
 
+<!-- Quote Modal -->
 <div class="modal" id="quoteModal" role="dialog" aria-modal="true" aria-label="Request a quote">
   <div class="modal-card">
     <div class="modal-head">
@@ -767,13 +906,15 @@
           <label for="qNotes">Notes</label>
           <input id="qNotes" name="notes" placeholder="Preferences (yacht size, cabins, itinerary, occasion)..." />
         </div>
+
         <div class="full" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
           <button class="btn primary" type="submit" style="flex:1;">Send Inquiry</button>
           <button class="btn" type="button" id="prefillFromFilters">Use Filter Selections</button>
         </div>
+
         <div class="full">
           <small style="color:var(--muted); line-height:1.5;">
-            Prototype only. In production this posts to WP (CF7/Gravity) or to a CRM via REST API.
+            Prototype only. In production this posts to a form handler or CRM.
           </small>
         </div>
       </form>
@@ -782,29 +923,35 @@
 </div>
 
 <script>
+  // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // WhatsApp link (replace number/message)
-  const waNumber = "971000000000"; // TODO: replace
+  const waNumber = "971000000000"; // TODO: replace (digits only)
   const waMessage = encodeURIComponent("Hi Senith Yacht Charters — I’d like to enquire about a yacht charter.");
-  document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${waMessage}`;
+  const waLink = document.getElementById('waLink');
+  if (waLink) waLink.href = `https://wa.me/${waNumber}?text=${waMessage}`;
 
+  // Modal controls
   const modal = document.getElementById('quoteModal');
+
   const openers = [
-    'openQuoteTop','openQuoteHero','openQuoteFleet','openQuoteImmersive','openQuoteCta','openQuoteFab'
+    'openQuoteTop','openQuoteHero','openQuoteFleet','openQuoteImmersive','openQuoteCta','openQuoteFab',
+    'openQuotePov','openQuotePov2'
   ].map(id => document.getElementById(id)).filter(Boolean);
 
   const openModal = () => {
     modal.classList.add('open');
-    setTimeout(()=>document.getElementById('qName').focus(), 50);
+    setTimeout(() => document.getElementById('qName')?.focus(), 50);
   };
   const closeModal = () => modal.classList.remove('open');
 
   openers.forEach(btn => btn.addEventListener('click', openModal));
-  document.getElementById('closeModal').addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-  window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+  document.getElementById('closeModal')?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
+  // Fleet filters
   const filters = {
     guests: document.getElementById('fGuests'),
     length: document.getElementById('fLength'),
@@ -828,9 +975,10 @@
       card.style.display = ok ? '' : 'none';
     });
   }
-  document.getElementById('applyFilters').addEventListener('click', applyFilters);
+  document.getElementById('applyFilters')?.addEventListener('click', applyFilters);
 
-  document.getElementById('prefillFromFilters').addEventListener('click', () => {
+  // Prefill modal from filters
+  document.getElementById('prefillFromFilters')?.addEventListener('click', () => {
     const dest = filters.destination.value || 'Dubai';
     document.getElementById('qDestination').value = dest;
 
@@ -842,12 +990,27 @@
     if(notes.length) document.getElementById('qNotes').value = notes.join(' | ');
   });
 
-  document.getElementById('quoteForm').addEventListener('submit', (e) => {
+  // Form submit (prototype)
+  document.getElementById('quoteForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target).entries());
     alert(`Thanks ${data.name}! We'll reply to ${data.email} with options for ${data.destination}.`);
     closeModal();
     e.target.reset();
+  });
+
+  // POV video controls
+  const v = document.getElementById('povVideo');
+
+  document.getElementById('povToggle')?.addEventListener('click', () => {
+    if (!v) return;
+    if (v.paused) v.play();
+    else v.pause();
+  });
+
+  document.getElementById('povMute')?.addEventListener('click', () => {
+    if (!v) return;
+    v.muted = !v.muted;
   });
 </script>
 </body>
